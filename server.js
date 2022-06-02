@@ -18,7 +18,6 @@ app.get("/", (req, res) => {
 
 // Routes
 require('./app/routes/auth.routes')(app);
-require('./app/routes/tutorial.routes')(app);
 
 const port = process.env.PORT || 86
 app.listen(port, () => {
