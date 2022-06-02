@@ -13,7 +13,7 @@ exports.register = async(req, res) => {
             phone_number,
             role
         } = req.body;
-
+      
         data = {first_name, last_name, email, phone_number, role};
         let validateResponse = requestHelper.validate(data);
 
