@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer');
 const cors = require('cors');
 var app = express();
 
@@ -9,12 +10,10 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(multer().none() );
+
 const db = require('./app/models');
 db.sequelize.sync();
-
-app.get("/", (req, res) => {
-    res.send('Working');
-});
 
 // Routes
 require('./app/routes/auth.routes')(app);
