@@ -16,6 +16,7 @@ exports.validateRegister = () => {
                     throw new Error('Email already exists');
                 }
             }),
+        body('password', 'Password required').notEmpty(),
         body('phone_number', 'Phone number required').notEmpty(),
         body('role', 'Invalid role').isIn(['instructor', 'learner'])
     ];
