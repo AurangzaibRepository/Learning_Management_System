@@ -4,8 +4,8 @@ const user = db.user;
 
 exports.validateRegister = () => {
     return [
-        body('first_name', 'First name is required ').notEmpty(),
-        body('last_name', 'Last name is required').notEmpty(),
+        body('first_name', 'First name required ').notEmpty(),
+        body('last_name', 'Last name required').notEmpty(),
         body('email').isEmail().withMessage('Invalid Email')
             .custom(async (email) => {
                 let recordCount = await user.count({
@@ -16,7 +16,7 @@ exports.validateRegister = () => {
                     throw new Error('Email already exists');
                 }
             }),
-        body('phone_number', 'Phone number is required').notEmpty(),
+        body('phone_number', 'Phone number required').notEmpty(),
         body('role', 'Invalid role').isIn(['instructor', 'learner'])
     ];
 }
