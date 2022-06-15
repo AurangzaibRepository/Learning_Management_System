@@ -1,3 +1,4 @@
 {
-    "uploads": "/uploads/"
+    "uploads": "/uploads/",
+    "jwt_secret_key": "H@McQfTjWnZr4u7x"
 }
