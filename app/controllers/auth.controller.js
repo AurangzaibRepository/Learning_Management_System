@@ -13,9 +13,9 @@ exports.register = async(req, res) => {
         }
 
         req.body.profile_picture = req.file.originalname;
-        await user.create(req.body);
+        let data = await user.register(req);
         
-        return requestHelper.response(res, true);
+        return requestHelper.response(res, true, '', data);
     } catch (exception) {
         return requestHelper.response(res, false, exception.message);
     }
