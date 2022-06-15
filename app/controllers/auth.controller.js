@@ -9,7 +9,7 @@ exports.register = async(req, res) => {
         const errors = validationResult(req).formatWith(({msg}) => msg );
 
         if (!errors.isEmpty()) {
-            return requestHelper.response(res, false, errors.array());
+            return requestHelper.response(res, false, errors.array({onlyFirstError: true}));
         }
 
         req.body.profile_picture = req.file.originalname;
