@@ -1,5 +1,6 @@
 const config = require('../../config.json');
 const authHelper = require('../helpers/auth.helper');
+const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("user", {
@@ -17,7 +18,11 @@ module.exports = (sequelize, Sequelize) => {
         },
         password: {
             type: Sequelize.STRING(100),
-            allowNull: false
+            allowNull: false,
+            /*set(value) {
+                const salt = bcrypt.genSaltSync(10);
+                this.setDataValue('password', bcrypt.hashSync(value, salt));
+            }*/
         },
         phone_number: {
             type: Sequelize.STRING(50),
@@ -35,6 +40,11 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.ENUM('learner', 'instructor'),
             allowNull: false
         }
+    });
+
+    User.beforeCreate(async (user, options) => {
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(user.password, salt);
     });
 
     User.register = async(req) => {
