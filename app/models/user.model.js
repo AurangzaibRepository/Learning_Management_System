@@ -1,3 +1,5 @@
+var config = require('../../config.json');
+
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("user", {
         first_name: {
@@ -39,7 +41,7 @@ module.exports = (sequelize, Sequelize) => {
             user_id: user.id,
             first_name: user.first_name,
             last_name: user.last_name,
-            profile_picture: user.profile_picture,
+            profile_picture: config.uploads + user.profile_picture,
             token: '123'
         };
 
