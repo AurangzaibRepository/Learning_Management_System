@@ -1,4 +1,5 @@
-var config = require('../../config.json');
+const config = require('../../config.json');
+const authHelper = require('../helpers/auth.helper');
 
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("user", {
@@ -36,13 +37,17 @@ module.exports = (sequelize, Sequelize) => {
 
         let response = {}
         let user = await User.create(req.body);
+        let tokenData = {
+            time: Date(),
+            user_id: user.id
+        };
 
         response = {
             user_id: user.id,
             first_name: user.first_name,
             last_name: user.last_name,
             profile_picture: config.uploads + user.profile_picture,
-            token: '123'
+            token: authHelper.getJWT(tokenData)
         };
 
         return response;
