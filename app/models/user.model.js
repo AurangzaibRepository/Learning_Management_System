@@ -51,17 +51,12 @@ module.exports = (sequelize, Sequelize) => {
 
         let response = {}
         let user = await User.create(req.body);
-        let tokenData = {
-            time: Date(),
-            user_id: user.id
-        };
-
         response = {
             user_id: user.id,
             first_name: user.first_name,
             last_name: user.last_name,
             profile_picture: config.uploads + user.profile_picture,
-            token: authHelper.getJWT(tokenData)
+            token: authHelper.getJWT(user.id)
         };
 
         return response;
