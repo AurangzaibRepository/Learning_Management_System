@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
+const dotenv = require('dotenv');
 var app = express();
 
 var corsOptions = {
@@ -29,6 +30,9 @@ db.sequelize.sync();
 
 // Routes
 require('./app/routes/auth.routes')(app);
+
+
+dotenv.config();
 
 const port = process.env.PORT || 86
 app.listen(port, () => {
