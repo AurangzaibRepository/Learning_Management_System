@@ -23,6 +23,11 @@ exports.register = async(req, res) => {
 
 exports.login = async(req, res) => {
     try {
+        const errors = validationResult(req).formatWith(({msg}) => msg);
+
+        if (!errors.isEmpty()) {
+            return requestHelper.response(res, false, errors.array({onlyFirstError: true}));
+        }
 
         return requestHelper.response(res, true);
 
