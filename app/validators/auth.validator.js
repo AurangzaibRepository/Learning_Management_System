@@ -25,7 +25,16 @@ exports.validateRegister = () => {
 exports.validateLogin = () => {
     return [
         body('email').notEmpty().withMessage('Email required')
-            .isEmail().withMessage('Invalid email'),
+            .isEmail().withMessage('Invalid email')
+            .custom(async(email) => {
+                const userProfile = await user.findOne({
+                    where: {email: email}
+                });
+
+                if (!userProfile) {
+                    throw new Error('User does not exist');
+                }
+            }),
         body('password', 'Password required').notEmpty()
     ];
 }
