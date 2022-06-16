@@ -20,3 +20,13 @@ exports.register = async(req, res) => {
         return requestHelper.response(res, false, exception.message);
     }
 }
+
+exports.login = async(req, res) => {
+    try {
+
+        return requestHelper.response(res, true);
+
+    } catch (exception) {
+        return requestHelper.response(res, false, exception.message);
+    }
+}
