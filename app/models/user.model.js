@@ -49,17 +49,9 @@ module.exports = (sequelize, Sequelize) => {
 
     User.register = async(req) => {
 
-        let response = {}
         let user = await User.create(req.body);
-        response = {
-            user_id: user.id,
-            first_name: user.first_name,
-            last_name: user.last_name,
-            profile_picture: config.uploads + user.profile_picture,
-            token: authHelper.getJWT(user.id)
-        };
 
-        return response;
+        return User.generateProfile(user);
     }
 
     User.generateProfile = (user) => {
