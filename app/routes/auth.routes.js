@@ -11,7 +11,11 @@ module.exports = app => {
         auth.register
     );
 
-    router.post('/login', auth.login);
+    router.post(
+        '/login', 
+        validator.validateLogin(),
+        auth.login
+    );
 
     app.use('/auth', router);
 }
