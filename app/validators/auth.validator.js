@@ -21,3 +21,11 @@ exports.validateRegister = () => {
         body('role', 'Invalid role').isIn(['instructor', 'learner'])
     ];
 }
+
+exports.validateLogin = () => {
+    return [
+        body('email').notEmpty().withMessage('Email required')
+            .isEmail().withMessage('Invalid email'),
+        body('password', 'Password required').notEmpty()
+    ];
+}
