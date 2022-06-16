@@ -29,7 +29,11 @@ exports.login = async(req, res) => {
             return requestHelper.response(res, false, errors.array({onlyFirstError: true}));
         }
 
-        return requestHelper.response(res, true);
+        const userProfile = await user.findOne({
+            where: {email: req.body.email}
+        });
+
+        return requestHelper.response(res, true, null, user.generateProfile(userProfile));
 
     } catch (exception) {
         return requestHelper.response(res, false, exception.message);
