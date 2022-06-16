@@ -11,5 +11,7 @@ module.exports = app => {
         auth.register
     );
 
+    router.post('/login', auth.login);
+
     app.use('/auth', router);
 }
