@@ -13,8 +13,19 @@ exports.get = async(req, res) => {
 
         let user = await db.user.findByPk(req.params.id);
         return requestHelper.response(res, true, null, db.user.generateProfile(user));
-        
+
     } catch(exception) {
         return requestHelper.response(res, false, exception.message);
     }
 } 
+
+exports.updateProfile = async(req, res) => {
+
+    try {
+
+        return requestHelper.response(res, true);
+
+    } catch(exception) {
+        return requestHelper.response(res, false, exception.message);
+    }
+}
