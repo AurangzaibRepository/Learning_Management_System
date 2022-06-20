@@ -22,6 +22,11 @@ exports.get = async(req, res) => {
 exports.updateProfile = async(req, res) => {
 
     try {
+        const errors = validationResult(req).formatWith(({msg}) => msg);
+
+        if (!errors.isEmpty()) {
+            return requestHelper.response(res, false, errors.array());
+        }
 
         return requestHelper.response(res, true);
 
