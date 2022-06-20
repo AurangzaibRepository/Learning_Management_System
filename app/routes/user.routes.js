@@ -11,7 +11,11 @@ module.exports = app => {
         user.get
     );
 
-    router.put('/:id', user.updateProfile);
+    router.put(
+        '/:id', 
+        validator.validateUpdate(),
+        user.updateProfile
+    );
 
     app.use('/user', router);
 }
