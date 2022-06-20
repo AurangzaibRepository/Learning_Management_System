@@ -11,5 +11,7 @@ module.exports = app => {
         user.get
     );
 
+    router.put('/:id', user.updateProfile);
+
     app.use('/user', router);
 }
