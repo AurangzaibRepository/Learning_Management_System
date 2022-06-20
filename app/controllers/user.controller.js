@@ -11,7 +11,9 @@ exports.get = async(req, res) => {
             return requestHelper.response(res, false, errors.array());
         }
 
-        return requestHelper.response(res, true, null, null);
+        let user = await db.user.findByPk(req.params.id);
+        return requestHelper.response(res, true, null, db.user.generateProfile(user));
+        
     } catch(exception) {
         return requestHelper.response(res, false, exception.message);
     }
