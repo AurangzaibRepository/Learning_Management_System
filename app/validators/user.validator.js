@@ -20,6 +20,13 @@ exports.validateUpdate = () => {
         check('last_name', 'Last name required').notEmpty(),
         check('phone_number', 'Phone number required').notEmpty(),
         check('email').notEmpty().withMessage('Email required')
-            .isEmail().withMessage('Invalid email')
+            .isEmail().withMessage('Invalid email'),
+        check('id').custom(async(id) => {
+            const user = await db.user.findByPk(id);
+
+            if (!user) {
+                throw new Error('User not found');
+            }
+        })     
     ];
 }
