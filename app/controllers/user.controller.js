@@ -25,7 +25,7 @@ exports.updateProfile = async(req, res) => {
         const errors = validationResult(req).formatWith(({msg}) => msg);
 
         if (!errors.isEmpty()) {
-            return requestHelper.response(res, false, errors.array());
+            return requestHelper.response(res, false, errors.array({onlyFirstError: true}));
         }
 
         return requestHelper.response(res, true);
