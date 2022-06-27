@@ -19,6 +19,7 @@ exports.validateUpdate = () => {
         check('first_name', 'First name required').notEmpty(),
         check('last_name', 'Last name required').notEmpty(),
         check('phone_number', 'Phone number required').notEmpty(),
-        check('email').isEmail().withMessage('Invalid email')
+        check('email').notEmpty().withMessage('Email required')
+            .isEmail().withMessage('Invalid email')
     ];
 }
