@@ -13,6 +13,7 @@ module.exports = app => {
 
     router.put(
         '/:id', 
+        validator.validateUser(),
         validator.validateUpdate(),
         user.updateProfile
     );
