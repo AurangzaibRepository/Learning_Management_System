@@ -1,33 +1,31 @@
 exports.response = (res, status, message, data) => {
+  const response = {
+    status: status,
+  };
 
-    let response = {
-        status: status
-    };
+  if (message) {
+    response.message = message;
+  }
 
-    if (message) {
-        response.message = message;
-    }
+  if (data) {
+    response.data = data;
+  }
 
-    if (data) {
-        response.data = data;
-    }
-
-    return res.send(response);
-}
+  return res.send(response);
+};
 
 exports.validate = (data) => {
-    
-    let response = {
-        valid: true,
-        messages: []
-    };
+  const response = {
+    valid: true,
+    messages: [],
+  };
 
-    for (let key in data) {
-        if (!data[key]) {
-            response.messages.push(`${key} is required`);
-            response.valid = false;
-        }
+  for (const key in data) {
+    if (!data[key]) {
+      response.messages.push(`${key} is required`);
+      response.valid = false;
     }
+  }
 
-    return response;
-}
+  return response;
+};
