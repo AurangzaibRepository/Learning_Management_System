@@ -21,21 +21,27 @@ exports.register = async (req, res) => {
   }
 };
 
-exorts.login = async(req, res) => {
-    try {
-        const errors = validationResult(req).formatWith(({msg}) => msg);
+exports.login = async(req, res) => {
+  try {
+    const errors = validationResult(req).formatWith(({msg}) => msg);
 
-        if (!errors.isEmpty()) {
-            return requestHelper.response(res, false, errors.array({onlyFirstError: true}));
-        }
-
-        const userProfile = await user.findOne({
-            where: {email: req.body.email}
-        });
-
-        return requestHelper.response(res, true, null, user.generateProfile(userProfile));
-
-    } catch (exception) {
-        return requestHelper.response(res, false, exception.message);
+    if (!errors.isEmpty()) {
+      return requestHelper.response(res, false, errors.array({
+        onlyFirstError: true,
+      }));
     }
-}
+
+    const userProfile = await user.findOne({
+      where: {email: req.body.email},
+    });
+
+    return requestHelper.response(
+        res,
+        true,
+        null,
+        user.generateProfile(userProfile),
+    );
+  } catch (exception) {
+    return requestHelper.response(res, false, exception.message);
+  }
+};
