@@ -3,20 +3,19 @@ const router = express.Router();
 const user = require('../controllers/user.controller');
 const validator = require('../validators/user.validator');
 
-module.exports = app => {
-
+module.exports = (app) => {
     router.get(
         '/:id', 
         validator.validateGet(),
-        user.get
+        user.get,
     );
 
     router.put(
         '/:id', 
         validator.validateUser(),
         validator.validateUpdate(),
-        user.updateProfile
+        user.updateProfile,
     );
 
     app.use('/user', router);
-}
+};
