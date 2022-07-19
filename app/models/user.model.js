@@ -1,4 +1,3 @@
-const config = require('../../config.json');
 const authHelper = require('../helpers/auth.helper');
 const bcrypt = require('bcrypt');
 
