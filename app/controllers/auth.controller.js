@@ -3,25 +3,25 @@ const user = db.user;
 const {validationResult} = require('express-validator');
 const requestHelper = require('../helpers/request.helper');
 
-exports.register = async(req, res) => {
+exports.register = async (req, res) => {
+  try {
+    const errors = validationResult(req).formatWith(({msg}) => msg );
 
-    try {
-        const errors = validationResult(req).formatWith(({msg}) => msg );
-
-        if (!errors.isEmpty()) {
-            return requestHelper.response(res, false, errors.array({onlyFirstError: true}));
-        }
-
-        req.body.profile_picture = req.file.originalname;
-        let data = await user.register(req);
-        
-        return requestHelper.response(res, true, '', data);
-    } catch (exception) {
-        return requestHelper.response(res, false, exception.message);
+    if (!errors.isEmpty()) {
+      return requestHelper.response(res, false, errors.array({
+        onlyFirstError: true,
+      }));
     }
-}
 
-exports.login = async(req, res) => {
+    req.body.profile_picture = req.file.originalname;
+    const data = await user.register(req);
+    return requestHelper.response(res, true, '', data);
+  } catch (exception) {
+    return requestHelper.response(res, false, exception.message);
+  }
+};
+
+exorts.login = async(req, res) => {
     try {
         const errors = validationResult(req).formatWith(({msg}) => msg);
 
