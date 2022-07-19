@@ -22,19 +22,21 @@ exports.get = async (req, res) => {
   }
 };
 
-exports.updateProfile = async(req, res) => {
+exports.updateProfile = async (req, res) => {
+  try {
+    const errors = validationResult(req).formatWith(({msg}) => msg);
 
-    try {
-        const errors = validationResult(req).formatWith(({msg}) => msg);
-
-        if (!errors.isEmpty()) {
-            return requestHelper.response(res, false, errors.array({onlyFirstError: true}));
-        }
-
-        await db.user.update(req.params.id, req.body);
-        return requestHelper.response(res, true);
-
-    } catch(exception) {
-        return requestHelper.response(res, false, exception.message);
+    if (!errors.isEmpty()) {
+      return requestHelper.response(
+          res,
+          false,
+          errors.array({onlyFirstError: true}),
+      );
     }
-}
+
+    await db.user.update(req.params.id, req.body);
+    return requestHelper.response(res, true, 'Profile updated successfully');
+  } catch (exception) {
+    return requestHelper.response(res, false, exception.message);
+  }
+};
