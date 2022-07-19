@@ -1,6 +1,6 @@
-var db = require('../models');
+const db = require('../models');
 const {validationResult} = require('express-validator');
-var requestHelper = require('../helpers/request.helper');
+const requestHelper = require('../helpers/request.helper');
 
 exports.get = async (req, res) => {
   try {
