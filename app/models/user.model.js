@@ -62,5 +62,14 @@ module.exports = (sequelize, Sequelize) => {
     };
   };
 
+  User.update = async(Id, data) => {
+    await User.update(
+        data,
+        {where: {
+          id: Id,
+        }},
+    );
+  };
+
   return User;
 };
