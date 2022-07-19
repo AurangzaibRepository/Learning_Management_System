@@ -31,15 +31,13 @@ exports.login = async (req, res) => {
       }));
     }
 
-    const userProfile = await user.findOne({
-      where: {email: req.body.email},
-    });
+    const userData = await user.findByAttribute('email', req.body.email);
 
     return requestHelper.response(
         res,
         true,
         null,
-        user.generateProfile(userProfile),
+        user.generateProfile(userData),
     );
   } catch (exception) {
     return requestHelper.response(res, false, exception.message);
