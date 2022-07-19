@@ -3,7 +3,7 @@ const router = express.Router();
 const auth = require('../controllers/auth.controller');
 const validator = require('../validators/auth.validator');
 
-module.exports = app => {
+module.exports = (app) => {
   router.post(
       '/register',
       validator.validateRegister(),
