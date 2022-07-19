@@ -27,7 +27,7 @@ exports.validateLogin = () => {
   return [
     body('email').notEmpty().withMessage('Email required')
         .isEmail().withMessage('Invalid email')
-        .custom(async(email, {req}) => {
+        .custom(async (email, {req}) => {
           const userProfile = await user.findOne({
             where: {email: email},
           });
