@@ -4,18 +4,17 @@ const auth = require('../controllers/auth.controller');
 const validator = require('../validators/auth.validator');
 
 module.exports = app => {
+  router.post(
+      '/register',
+      validator.validateRegister(),
+      auth.register,
+  );
 
-    router.post(
-        '/register',
-        validator.validateRegister(),
-        auth.register
-    );
+  router.post(
+      '/login',
+      validator.validateLogin(),
+      auth.login,
+  );
 
-    router.post(
-        '/login', 
-        validator.validateLogin(),
-        auth.login
-    );
-
-    app.use('/auth', router);
-}
+  app.use('/auth', router);
+};
