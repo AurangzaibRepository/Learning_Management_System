@@ -51,7 +51,7 @@ module.exports = (sequelize, Sequelize) => {
     const user = await User.create(req.body);
 
     return User.generateProfile(user);
-  },
+  };
 
   User.generateProfile = (user) => {
     return {
@@ -61,7 +61,7 @@ module.exports = (sequelize, Sequelize) => {
       profile_picture: config.uploads + user.profile_picture,
       token: authHelper.getJWT(user.id),
     };
-  },
+  };
 
   return User;
-}
+};
