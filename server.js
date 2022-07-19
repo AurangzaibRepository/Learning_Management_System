@@ -11,6 +11,7 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(express.static('uploads'));
 
 // Multer configuration
 const storage = multer.diskStorage({
