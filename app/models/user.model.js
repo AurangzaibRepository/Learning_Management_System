@@ -58,7 +58,7 @@ module.exports = (sequelize, Sequelize) => {
       user_id: user.id,
       first_name: user.first_name,
       last_name: user.last_name,
-      profile_picture: config.uploads + user.profile_picture,
+      profile_picture: `/profile/${user.profile_picture}`,
       token: authHelper.getJWT(user.id),
     };
   };
