@@ -62,7 +62,17 @@ module.exports = (sequelize, Sequelize) => {
     };
   };
 
-  User.update = async(Id, data) => {
+  User.findByAttribute = async (field, value) => {
+    const data = await User.findOne({
+      where: {
+        [field]: value,
+      },
+    });
+
+    return data;
+  };
+
+  User.update = async (Id, data) => {
     await User.update(
         data,
         {where: {
