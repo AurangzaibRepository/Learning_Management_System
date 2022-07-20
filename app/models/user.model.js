@@ -1,3 +1,4 @@
+const userHelper = require('../helpers/user.helper');
 const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, Sequelize) => {
@@ -48,7 +49,7 @@ module.exports = (sequelize, Sequelize) => {
   User.register = async (req) => {
     const user = await User.create(req.body);
 
-    return User.generateProfile(user);
+    return userHelper.generateProfile(user);
   };
 
   User.findByAttribute = async (field, value) => {
