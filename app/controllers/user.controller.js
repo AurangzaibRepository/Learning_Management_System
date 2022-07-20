@@ -1,6 +1,7 @@
 const db = require('../models');
 const {validationResult} = require('express-validator');
 const requestHelper = require('../helpers/request.helper');
+const userHelper = require('../helpers/user.helper');
 
 exports.get = async (req, res) => {
   try {
@@ -15,7 +16,7 @@ exports.get = async (req, res) => {
         res,
         true,
         null,
-        db.user.generateProfile(user),
+        userHelper.generateProfile(user),
     );
   } catch (exception) {
     return requestHelper.response(res, false, exception.message);
