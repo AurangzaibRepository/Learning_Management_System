@@ -1,4 +1,3 @@
-const authHelper = require('../helpers/auth.helper');
 const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, Sequelize) => {
