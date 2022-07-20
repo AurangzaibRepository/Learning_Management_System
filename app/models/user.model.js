@@ -52,16 +52,6 @@ module.exports = (sequelize, Sequelize) => {
     return User.generateProfile(user);
   };
 
-  User.generateProfile = (user) => {
-    return {
-      user_id: user.id,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      profile_picture: `/profile/${user.profile_picture}`,
-      token: authHelper.getJWT(user.id),
-    };
-  };
-
   User.findByAttribute = async (field, value) => {
     const data = await User.findOne({
       where: {
