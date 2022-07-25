@@ -22,7 +22,7 @@ exports.register = async (req, res, next) => {
   }
 };
 
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
   try {
     const errors = validationResult(req).formatWith(({msg}) => msg);
 
@@ -40,7 +40,7 @@ exports.login = async (req, res) => {
         null,
         userHelper.generateProfile(userData),
     );
-  } catch (exception) {
-    return requestHelper.response(res, false, exception.message);
+  } catch (error) {
+    return next(error);
   }
 };
