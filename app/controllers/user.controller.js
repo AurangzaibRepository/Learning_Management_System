@@ -35,6 +35,10 @@ exports.updateProfile = async (req, res, next) => {
       );
     }
 
+    if (req.hasOwnProperty('file')) {
+      req.body.profile_picture = req.file.originalname;
+    }
+
     await db.user.updateRecord(req.params.id, req.body);
     return requestHelper.response(res, true, 'Profile updated successfully');
   } catch (error) {
