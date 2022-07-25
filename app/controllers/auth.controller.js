@@ -4,7 +4,7 @@ const {validationResult} = require('express-validator');
 const requestHelper = require('../helpers/request.helper');
 const userHelper = require('../helpers/user.helper');
 
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
   try {
     const errors = validationResult(req).formatWith(({msg}) => msg );
 
@@ -17,8 +17,8 @@ exports.register = async (req, res) => {
     req.body.profile_picture = req.file.originalname;
     const data = await user.register(req);
     return requestHelper.response(res, true, '', data);
-  } catch (exception) {
-    return requestHelper.response(res, false, exception.message);
+  } catch (error) {
+    return next(error);
   }
 };
 
