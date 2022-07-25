@@ -23,7 +23,7 @@ exports.get = async (req, res, next) => {
   }
 };
 
-exports.updateProfile = async (req, res) => {
+exports.updateProfile = async (req, res, next) => {
   try {
     const errors = validationResult(req).formatWith(({msg}) => msg);
 
@@ -37,7 +37,7 @@ exports.updateProfile = async (req, res) => {
 
     await db.user.update(req.params.id, req.body);
     return requestHelper.response(res, true, 'Profile updated successfully');
-  } catch (exception) {
-    return requestHelper.response(res, false, exception.message);
+  } catch (error) {
+    return next(error);
   }
 };
