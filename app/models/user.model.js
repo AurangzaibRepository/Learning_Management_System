@@ -14,6 +14,7 @@ module.exports = (sequelize, Sequelize) => {
     email: {
       type: Sequelize.STRING(80),
       allowNull: false,
+      unique: true,
     },
     password: {
       type: Sequelize.STRING(100),
@@ -26,6 +27,7 @@ module.exports = (sequelize, Sequelize) => {
     phone_number: {
       type: Sequelize.STRING(50),
       allowNull: false,
+      unique: true,
     },
     status: {
       type: Sequelize.ENUM('active', 'inactive'),
