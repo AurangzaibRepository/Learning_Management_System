@@ -14,7 +14,10 @@ exports.register = async (req, res, next) => {
       }));
     }
 
-    req.body.profile_picture = req.file.originalname;
+    if (Object.prototype.hasOwnProperty.call(req, 'file')) {
+      req.body.profile_picture = req.file.originalname;
+    }
+
     const data = await user.register(req);
     return requestHelper.response(res, true, '', data);
   } catch (error) {
