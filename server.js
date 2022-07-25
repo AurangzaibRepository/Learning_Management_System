@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const requestHelper = require('./app/helpers/request.helper');
 const app = express();
 
 const corsOptions = {
@@ -32,6 +33,11 @@ db.sequelize.sync();
 // Routes
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+
+// Error handler middleware
+app.use((error, req, res, next) => {
+  return requestHelper.response(res, false, error.message);
+});
 
 dotenv.config();
 
