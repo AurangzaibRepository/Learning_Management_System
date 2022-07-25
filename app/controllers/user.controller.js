@@ -3,7 +3,7 @@ const {validationResult} = require('express-validator');
 const requestHelper = require('../helpers/request.helper');
 const userHelper = require('../helpers/user.helper');
 
-exports.get = async (req, res) => {
+exports.get = async (req, res, next) => {
   try {
     const errors = validationResult(req).formatWith(({msg}) => msg);
 
@@ -18,8 +18,8 @@ exports.get = async (req, res) => {
         null,
         userHelper.generateProfile(user),
     );
-  } catch (exception) {
-    return requestHelper.response(res, false, exception.message);
+  } catch (error) {
+    return next(error);
   }
 };
 
