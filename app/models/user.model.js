@@ -33,7 +33,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     profile_picture: {
       type: Sequelize.STRING(300),
-      allowNull: false,
+      allowNull: true,
     },
     role: {
       type: Sequelize.ENUM('learner', 'instructor'),
