@@ -18,7 +18,16 @@ exports.validateRegister = () => {
           }
         }),
     body('password', 'Password required').notEmpty(),
-    body('phone_number', 'Phone number required').notEmpty(),
+    body('phone_number').notEmpty().withMessage('Phone number required')
+        .custom(async (phoneNumber) => {
+          const recordCount = await user.count({
+            where: {phone_number: phoneNumber},
+          });
+
+          if (recordCount > 0) {
+            throw new Error('Phone number exists');
+          }
+        }),
     body('role', 'Invalid role').isIn(['instructor', 'learner']),
   ];
 };
