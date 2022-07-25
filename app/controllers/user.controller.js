@@ -35,7 +35,7 @@ exports.updateProfile = async (req, res, next) => {
       );
     }
 
-    if (req.hasOwnProperty('file')) {
+    if (Object.prototype.hasOwnProperty.call(req, 'file')) {
       req.body.profile_picture = req.file.originalname;
     }
 
