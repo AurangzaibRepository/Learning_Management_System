@@ -35,7 +35,7 @@ exports.updateProfile = async (req, res, next) => {
       );
     }
 
-    await db.user.update(req.params.id, req.body);
+    await db.user.updateRecord(req.params.id, req.body);
     return requestHelper.response(res, true, 'Profile updated successfully');
   } catch (error) {
     return next(error);

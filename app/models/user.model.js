@@ -62,7 +62,7 @@ module.exports = (sequelize, Sequelize) => {
     return data;
   };
 
-  User.update = async (Id, data) => {
+  User.updateRecord = async (Id, data) => {
     await User.update(
         data,
         {where: {
