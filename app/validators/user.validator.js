@@ -3,7 +3,7 @@ const db = require('../models');
 
 exports.validateGet = () => {
   return [
-    check('id').custom(async(id) => {
+    check('id').custom(async (id) => {
       const data = await db.user.findByPk(id);
 
       if (!data) {
@@ -25,7 +25,7 @@ exports.validateUpdate = () => {
 
 exports.validateUser = () => {
   return [
-    check('id').custom(async(id) => {
+    check('id').custom(async (id) => {
       const user = await db.user.findByPk(id);
 
       if (!user) {
