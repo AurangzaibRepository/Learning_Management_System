@@ -4,7 +4,7 @@ const db = require('../models');
 exports.validateGet = () => {
   return [
     check('id').custom(async(id) => {
-      let data = await db.user.findByPk(id);
+      const data = await db.user.findByPk(id);
 
       if (!data) {
         throw new Error('User not found');
@@ -14,14 +14,14 @@ exports.validateGet = () => {
 };
 
 exports.validateUpdate = () => {
-    return [
-        check('first_name', 'First name required').notEmpty(),
-        check('last_name', 'Last name required').notEmpty(),
-        check('phone_number', 'Phone number required').notEmpty(),
-        check('email').notEmpty().withMessage('Email required')
-            .isEmail().withMessage('Invalid email')
-    ];
-}
+  return [
+    check('first_name', 'First name required').notEmpty(),
+    check('last_name', 'Last name required').notEmpty(),
+    check('phone_number', 'Phone number required').notEmpty(),
+    check('email').notEmpty().withMessage('Email required')
+        .isEmail().withMessage('Invalid email'),
+  ];
+};
 
 exports.validateUser = () => {
     return [
