@@ -24,13 +24,13 @@ exports.validateUpdate = () => {
 };
 
 exports.validateUser = () => {
-    return [
-        check('id').custom(async(id) => {
-            const user = await db.user.findByPk(id);
+  return [
+    check('id').custom(async(id) => {
+      const user = await db.user.findByPk(id);
 
-            if (!user) {
-                throw new Error('User not found');
-            }
-        })     
-    ];
-}
+      if (!user) {
+        throw new Error('User not found');
+      }
+    }),
+  ];
+};
